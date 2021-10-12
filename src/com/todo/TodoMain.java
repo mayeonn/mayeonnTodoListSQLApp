@@ -13,14 +13,14 @@ public class TodoMain {
 		Scanner sc = new Scanner(System.in);
 		TodoList l = new TodoList();
 		String searchKeyword="";
-		boolean isList = false;
+		//boolean isList = false;
 		boolean quit = false;
 		
 		TodoUtil.loadList(l, "todolist.txt");
 		Menu.displaymenu();
 		do {
 			Menu.prompt();
-			isList = false;
+			//isList = false;
 			String choice = sc.nextLine();
 			if(choice.contains("find")) {
 				Integer index = choice.indexOf(" ");
@@ -45,7 +45,7 @@ public class TodoMain {
 				break;
 				
 			case "ls":
-				TodoUtil.listAll(l);
+				TodoUtil.listAll(l,"current_date",1);
 				break;
 				
 			case "ls_cate":
@@ -53,29 +53,23 @@ public class TodoMain {
 				break;
 
 			case "ls_name_asc":
-				l.sortByName();
 				System.out.println("-- 제목순으로 정렬하였습니다 --");
-				isList = true;
+				TodoUtil.listAll(l, "title", 1);
 				break;
 
 			case "ls_name_desc":
-				l.sortByName();
-				l.reverseList();
+				TodoUtil.listAll(l, "title", 0);
 				System.out.println("-- 제목역순으로 정렬하였습니다 --");
-				isList = true;
 				break;
 				
 			case "ls_date":
-				l.sortByDate();
+				TodoUtil.listAll(l, "due_date", 1);
 				System.out.println("-- 날짜순으로 정렬하였습니다 --");
-				isList = true;
 				break;
 				
 			case "ls_date_desc":
-				l.sortByDate();
-				l.reverseList();
+				TodoUtil.listAll(l, "due_date", 0);
 				System.out.println("-- 날짜역순으로 정렬하였습니다 --");
-				isList = true;
 				break;
 				
 			case "find":
@@ -92,7 +86,6 @@ public class TodoMain {
 				
 			case "exit":
 				quit = true;
-				TodoUtil.saveList(l,"todolist.txt");
 				System.out.println("-- 종료됩니다 --");
 				break;
 			
@@ -103,7 +96,7 @@ public class TodoMain {
 				break;
 			}
 			
-			if(isList) TodoUtil.listAll(l);
+			//if(isList) TodoUtil.listAll(l);
 		} while (!quit);
 		
 		

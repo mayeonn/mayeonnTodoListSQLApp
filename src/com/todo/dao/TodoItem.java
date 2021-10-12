@@ -3,6 +3,7 @@ package com.todo.dao;
 import java.util.Date;
 
 public class TodoItem {
+	private int id;
     private String title;
     private String desc;
     private String current_date;
@@ -19,7 +20,15 @@ public class TodoItem {
         
     }
     
-    public TodoItem(String title, String cate, String desc, String date, String currentdate) {
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public TodoItem(String title, String cate, String desc, String date, String currentdate) {
     	this.title=title;
         this.category=cate;
         this.desc=desc;
