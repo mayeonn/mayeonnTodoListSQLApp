@@ -16,7 +16,7 @@ public class TodoMain {
 		//boolean isList = false;
 		boolean quit = false;
 		
-		TodoUtil.loadList(l, "todolist.txt");
+		//l.importData("todolist.txt");
 		Menu.displaymenu();
 		do {
 			Menu.prompt();
@@ -73,7 +73,7 @@ public class TodoMain {
 				break;
 				
 			case "find":
-				TodoUtil.findItem(searchKeyword, l);
+				TodoUtil.findList(l,searchKeyword);
 				break;
 				
 			case "find_cate":

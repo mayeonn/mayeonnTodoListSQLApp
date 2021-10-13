@@ -19,12 +19,16 @@ public class DbConnect {
 	
 	public static Connection getConnection(){
 		if(conn==null) {
+			
 			try {
 				Class.forName("org.sqlite.JDBC");
-				conn = DriverManager.getConnection("jdbc:sqlite"+"todolist.db");
-			} catch(SQLException e)
-			{	e.printStackTrace();
+				conn = DriverManager.getConnection("jdbc:sqlite:"+"todolist.db");
+			}
+			
+			catch(SQLException | ClassNotFoundException e){	
+				e.printStackTrace();
 				}
+			
 			}
 		return conn;
 	}

@@ -28,6 +28,7 @@ public class TodoUtil {
 			System.out.println("-- 제목이 중복됩니다 --");
 			return;
 		}
+		
 		System.out.print("카테고리 > ");
 		category = sc.nextLine().trim();
 		
@@ -69,7 +70,7 @@ public class TodoUtil {
 		*/
 		sc.nextLine();
 		System.out.print("새 제목 > ");
-		new_title = sc.next().trim();
+		new_title = sc.nextLine().trim();
 		/*
 		String new_title = sc.nextLine().trim();
 		if (l.isDuplicateTitle(new_title)) {
@@ -91,6 +92,15 @@ public class TodoUtil {
 		if(l.updateItem(t)>0) System.out.println("-- 수정되었습니다 --");
 	}
 
+	public static void findList(TodoList l, String keyword) {
+		int count=0;
+		for(TodoItem item: l.getList(keyword)) {
+			System.out.println(item.toString());
+			count++;
+		}
+		System.out.printf("-- 총 %d개의 항목을 찾았습니다. --\n", count);
+	}
+	
 	public static void listAll(TodoList l, String orderby, int ordering) {
 		System.out.printf("[전체 목록, 총 %d개]\n", l.getCount());
 		for (TodoItem item : l.getOrderedList(orderby, ordering)) {

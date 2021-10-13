@@ -11,7 +11,7 @@ public class TodoItem {
     private String due_date;
 
 
-    public TodoItem(String title, String cate, String desc, String date){
+    public TodoItem(String title, String desc, String cate, String date){
         this.title=title;
         this.category=cate;
         this.desc=desc;
@@ -28,7 +28,7 @@ public class TodoItem {
 		this.id = id;
 	}
 
-	public TodoItem(String title, String cate, String desc, String date, String currentdate) {
+	public TodoItem(String title,  String desc, String cate, String date, String currentdate) {
     	this.title=title;
         this.category=cate;
         this.desc=desc;
