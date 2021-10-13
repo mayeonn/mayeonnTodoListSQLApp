@@ -29,6 +29,11 @@ public class TodoMain {
 				if(choice.contains("cate")) choice = "find_cate";
 				else choice = "find";
 			}
+			if(choice.contains("comp ")) {
+				Integer index = choice.indexOf(" ");
+				searchKeyword = choice.substring(index+1);
+				choice="comp";
+			}
 			
 			switch (choice) {
 
@@ -42,6 +47,10 @@ public class TodoMain {
 				
 			case "edit":
 				TodoUtil.updateItem(l);
+				break;
+				
+			case "comp":
+				TodoUtil.compItem(l, Integer.parseInt(searchKeyword));
 				break;
 				
 			case "ls":
@@ -70,6 +79,10 @@ public class TodoMain {
 			case "ls_date_desc":
 				TodoUtil.listAll(l, "due_date", 0);
 				System.out.println("-- 날짜역순으로 정렬하였습니다 --");
+				break;
+				
+			case "ls_comp":
+				TodoUtil.listComp(l);
 				break;
 				
 			case "find":

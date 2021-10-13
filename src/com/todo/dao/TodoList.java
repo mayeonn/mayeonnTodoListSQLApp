@@ -108,6 +108,22 @@ public class TodoList {
 		return count;
 	}
 	
+	public int completeItem(int index) {
+		
+		String sql = "update list set is_completed=1 where id = ?;";
+		PreparedStatement pstmt;
+		int count=0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, index);
+			count= pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
 	public int getCount() {
 		Statement stmt;
 		int count=0;
@@ -143,7 +159,8 @@ public class TodoList {
 				String description = rs.getString("memo");
 				String due_date = rs.getString("due_date");
 				String current_date = rs.getString("current_date");
-				TodoItem t = new TodoItem(title,description,category,due_date);
+				int is_complete = rs.getInt("is_completed");
+				TodoItem t = new TodoItem(title,description,category,due_date,is_complete);
 				t.setId(id);
 				t.setCurrent_date(current_date);
 				list.add(t);
@@ -170,7 +187,8 @@ public class TodoList {
 				String description = rs.getString("memo");
 				String due_date = rs.getString("due_date");
 				String current_date = rs.getString("current_date");
-				TodoItem t = new TodoItem(title,description,category,due_date);
+				int is_complete = rs.getInt("is_completed");
+				TodoItem t = new TodoItem(title,description,category,due_date,is_complete);
 				t.setId(id);
 				t.setCurrent_date(current_date);
 				list.add(t);
@@ -203,7 +221,8 @@ public class TodoList {
 				String description = rs.getString("memo");
 				String due_date = rs.getString("due_date");
 				String current_date = rs.getString("current_date");
-				TodoItem t = new TodoItem(title,description,category,due_date);
+				int is_complete = rs.getInt("is_completed");
+				TodoItem t = new TodoItem(title,description,category,due_date,is_complete);
 				t.setId(id);
 				t.setCurrent_date(current_date);
 				list.add(t);
@@ -255,7 +274,8 @@ public class TodoList {
 				String description = rs.getString("memo");
 				String due_date = rs.getString("due_date");
 				String current_date = rs.getString("current_date");
-				TodoItem t = new TodoItem(title,description,category,due_date);
+				int is_complete = rs.getInt("is_completed");
+				TodoItem t = new TodoItem(title,description,category,due_date,is_complete);
 				t.setId(id);
 				t.setCurrent_date(current_date);
 				list.add(t);

@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.*;
 
 import com.todo.dao.TodoItem;
@@ -38,7 +40,7 @@ public class TodoUtil {
 		System.out.print("마감일 > ");
 		due_date = sc.nextLine().trim();
 		
-		TodoItem t = new TodoItem(title, desc, category, due_date);
+		TodoItem t = new TodoItem(title, desc, category, due_date,0);
 		if(l.addItem(t)>0) System.out.println("-- 추가되었습니다 --");
 	}
 	
@@ -87,15 +89,20 @@ public class TodoUtil {
 		System.out.print("새 마감일 > ");
 		new_due_date = sc.nextLine().trim();
 		
-		TodoItem t = new TodoItem(new_title, new_desc, new_category, new_due_date);
+		TodoItem t = new TodoItem(new_title, new_desc, new_category, new_due_date,0);
 		t.setId(index);
 		if(l.updateItem(t)>0) System.out.println("-- 수정되었습니다 --");
 	}
 
+	public static void compItem(TodoList l, int index) {
+		
+		if(l.completeItem(index)>0) System.out.println("-- 완료 체크하였습니다. --");
+	}
+	
 	public static void findList(TodoList l, String keyword) {
 		int count=0;
 		for(TodoItem item: l.getList(keyword)) {
-			System.out.println(item.toString());
+			System.out.println(item.toString(item.getIs_complete()));
 			count++;
 		}
 		System.out.printf("-- 총 %d개의 항목을 찾았습니다. --\n", count);
@@ -104,8 +111,21 @@ public class TodoUtil {
 	public static void listAll(TodoList l, String orderby, int ordering) {
 		System.out.printf("[전체 목록, 총 %d개]\n", l.getCount());
 		for (TodoItem item : l.getOrderedList(orderby, ordering)) {
-			System.out.println(item.toString());
+			
+			System.out.println(item.toString(item.getIs_complete()));
 		}
+	}
+	
+	public static void listComp(TodoList l) {
+		int count = 0;
+		for (TodoItem item : l.getList()) {
+			if(item.getIs_complete()==1) {
+				count++;
+				System.out.println(item.toString(1));
+			}
+		}
+		 System.out.printf("\n총 %d개의 항목이 완료되었습니다.\n",count);
+		
 	}
 	
 	public static void listCate(TodoList l) {
@@ -131,7 +151,7 @@ public class TodoUtil {
 	public static void findCate(String keyWord, TodoList l) { 
 		int count=0;
 		for(TodoItem item : l.getListCategory(keyWord)) {
-			System.out.println(item.toString());
+			System.out.println(item.toString(item.getIs_complete()));
 			count++;
 		}
 		System.out.printf("총 %d개의 항목을 찾았습니다.\n", count);
@@ -165,7 +185,7 @@ public class TodoUtil {
 				String due_date = st.nextToken();
 				String current_date = st.nextToken();
 				
-				TodoItem t = new TodoItem(title, cate, desc, due_date, current_date);
+				TodoItem t = new TodoItem(title, cate, desc, due_date, current_date,0);
 				l.addItem(t);
 			}
 			br.close();
@@ -179,4 +199,5 @@ public class TodoUtil {
 		catch (NoSuchElementException e) {
 		}
 	}
+	
 }
