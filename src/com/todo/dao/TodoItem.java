@@ -10,15 +10,16 @@ public class TodoItem {
     private String category;
     private String due_date;
     private Integer is_complete;
+    private Integer is_important;
 
-
-    public TodoItem(String title, String desc, String cate, String date,int is_complete){
+    public TodoItem(String title, String desc, String cate, String date,int is_complete, int is_important){
         this.title=title;
         this.category=cate;
         this.desc=desc;
         this.due_date=date;
         this.current_date=new Date().toString();
         this.is_complete=is_complete;
+        this.is_important=is_important;
     }
     
 	public Integer getIs_complete() {
@@ -114,6 +115,14 @@ public class TodoItem {
 	
 	public String toSaveString() {
 		return category +"##"+ title +"##"+ desc +"##"+ due_date +"##"+ current_date ;
+	}
+
+	public Integer getIs_important() {
+		return is_important;
+	}
+
+	public void setIs_important(Integer is_important) {
+		this.is_important = is_important;
 	}
     
 }

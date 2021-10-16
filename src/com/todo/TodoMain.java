@@ -16,7 +16,7 @@ public class TodoMain {
 		//boolean isList = false;
 		boolean quit = false;
 		
-		//l.importData("todolist.txt");
+		l.importData("todolist.txt");
 		Menu.displaymenu();
 		do {
 			Menu.prompt();

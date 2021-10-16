@@ -40,7 +40,7 @@ public class TodoUtil {
 		System.out.print("마감일 > ");
 		due_date = sc.nextLine().trim();
 		
-		TodoItem t = new TodoItem(title, desc, category, due_date,0);
+		TodoItem t = new TodoItem(title, desc, category, due_date,0,0);
 		if(l.addItem(t)>0) System.out.println("-- 추가되었습니다 --");
 	}
 	
@@ -89,7 +89,7 @@ public class TodoUtil {
 		System.out.print("새 마감일 > ");
 		new_due_date = sc.nextLine().trim();
 		
-		TodoItem t = new TodoItem(new_title, new_desc, new_category, new_due_date,0);
+		TodoItem t = new TodoItem(new_title, new_desc, new_category, new_due_date,0,0);
 		t.setId(index);
 		if(l.updateItem(t)>0) System.out.println("-- 수정되었습니다 --");
 	}
